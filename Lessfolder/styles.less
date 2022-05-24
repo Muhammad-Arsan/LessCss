@@ -1,0 +1,86 @@
+// variables
+@background-color: grey;
+@font-family:Tahoma;
+@primary-color: #ccc;
+@secondary-color:#20B2AA;
+@line-height:1em + 1em;
+
+
+body{
+     background: @background-color;
+     font-family: @font-family;
+     line-height: @line-height;
+}
+
+//Text color mixin
+
+.text-color(@a) when (lightness(@a)>=50%){
+     color: black;
+}
+.text-color(@a) when (lightness (@a)< 50%){
+     color: white;
+}
+
+.primary-text{
+     color: @primary-color;
+}
+.btn{
+     padding: 10px 15px;
+     border: 0;
+     .border-radius(20px);
+}
+.primary-btn:extend(.btn){
+     background: @primary-color;
+     color: #fff;
+     .text-color(@primary-color)
+}
+h1,h3{
+     .bordered
+}
+.bordered{
+     border-top: dotted 1px #000;
+     border-bottom: solid 1px #000;
+}
+.border-radius(@radius){
+     border-radius: @radius;
+}
+ul#menu{
+     list-style: none;
+     background-color: lighten(@primary-color, 50%);
+     li{
+          padding: 10px 0;
+          a{
+               color: @primary-color;
+               text-decoration: none;
+               &:hover{
+                    color: #000;
+               }
+          }
+     }
+}                   
+#bundle(){
+     .button{
+          display: block;
+          border : 1px solid black;
+          background-color: grey;
+          &:hover{
+background-color: white;
+          }
+     }
+} 
+
+#view {
+ 
+color: orange;
+ 
+     #bundle.button()
+}
+
+#colors(){
+     primary: blue;
+     secondary: grey
+}
+.btn1{
+     background: #colors[primary];
+     border: 1px dotted #colors[secondary];
+}
